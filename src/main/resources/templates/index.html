@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Terminal Search</title>
     <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<input class="websiteUrl" placeholder="type in adress">
-<button class="searchButton">Suchen</button>
-
-<div></div>
-
-<!-- Dein JS-Skript ans Ende des body-Tags setzen -->
-<script src="searching.js"></script>
-
+<canvas class="matrix-bg" id="matrix"></canvas>
+<input class="websiteUrl" placeholder="Enter command..." spellcheck="false">
+<button class="searchButton">Execute</button>
+<div class="terminal-output">System ready...</div>
+<script src="/searching.js"></script>
+<script src="/script.js"></script>
 </body>
 </html>
