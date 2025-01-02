@@ -1,24 +1,21 @@
-const canvas = document.getElementById('matrix');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-resizeCanvas();
+const fontSize = 16;
+const columns = Math.floor(canvas.width / fontSize);
 
-const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = Array(Math.floor(columns)).fill(1);
+const drops = Array(columns).fill(0);
+const chars = ["0", "1"]; // Nur 0 und 1
 
 function draw() {
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; // Hintergrund leicht transparent
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = '#0F0';
-    ctx.font = fontSize + 'px monospace';
+    ctx.fillStyle = "#0F0"; // Grüne Schrift
+    ctx.font = `${fontSize}px monospace`;
 
     for (let i = 0; i < drops.length; i++) {
         const text = chars[Math.floor(Math.random() * chars.length)];
@@ -27,16 +24,13 @@ function draw() {
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
             drops[i] = 0;
         }
+
         drops[i]++;
     }
 
-    requestAnimationFrame(draw);
+    // Rekursiver Timeout für langsameres Zeichnen
+    setTimeout(draw, 60); // 50 ms Verzögerung
 }
 
-requestAnimationFrame(draw);
-
-window.addEventListener('resize', () => {
-    resizeCanvas();
-    drops.length = Math.floor(canvas.width / fontSize);
-    drops.fill(1);
-});
+// Zeichnung starten
+draw();
