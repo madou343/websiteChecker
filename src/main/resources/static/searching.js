@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-function requestWebsite ()  {
+function requestWebsite() {
     console.log("searching");
 
     const url = document.querySelector('.websiteUrl').value;
@@ -22,11 +22,24 @@ function requestWebsite ()  {
         .then(response => response.json())
         .then(data => {
 
-            const jsonString = JSON.stringify(data, null, 2);
-            terminalOutput.textContent = `Antwort vom Backend: \n${jsonString}`;
+            const formattedOutput = `
+                <p>Status: ${data.status}</p>
+                <p>URL: ${data.url}</p>
+                <p>Response Code: ${data.responseCode}</p>
+                <p>IP Address: ${data.ipAddress}</p>
+                <p>Response Time: ${data.responseTime} ms</p>
+                <p>Server Info: ${data.serverInfo}</p>
+            `;
+
+            terminalOutput.innerHTML = `${formattedOutput}`;
         })
         .catch(error => {
-            const jsonString = JSON.stringify(error, null, 2);
-            terminalOutput.textContent = `Es gab einen Fehler: \n${jsonString}`;
+            const errorMessage = `Es gab einen Fehler: <br>${JSON.stringify(error, null, 2)}`;
+            terminalOutput.innerHTML = errorMessage;
         });
 };
+
+const clearButton = document.querySelector('.clearButton');
+clearButton.addEventListener('click', function() {
+    terminalOutput.textContent = '';
+});

@@ -4,12 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
 import java.util.Map;
+
+
 
 @Controller
 public class HomeController {
@@ -69,5 +72,22 @@ public class HomeController {
                 "responseTime", responseTime,
                 "serverInfo", serverInfo
         ));
+    }
+
+    @GetMapping("/searchip")
+    public ResponseEntity<?> getIpInfo(@RequestParam String ip) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        try {
+            // Anfrage an ipinfo.io, um die IP-Infos zu erhalten
+            final String IP_INFO_URL = "https://ipinfo.io/{ip}/json";
+            String ipInfoResponse = restTemplate.getForObject(IP_INFO_URL, String.class, ip);
+
+            // Rückgabe der IP-Infos als JSON
+            return ResponseEntity.ok(ipInfoResponse);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("Fehler beim Abrufen von IP-Infos.");
+        }
     }
 }

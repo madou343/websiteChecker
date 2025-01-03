@@ -210,3 +210,57 @@ div::after {
         width: 0;
     }
 }
+
+/* Button Styles */
+.clearButton {
+    padding: 12px 32px;
+    font-size: 16px;
+    background: transparent;
+    color: var(--terminal-green);
+    border: 1px solid var(--terminal-green);
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.clearButton:hover {
+    background: var(--terminal-green);
+    color: var(--terminal-bg);
+    box-shadow: 0 0 20px var(--glow-color);
+    transform: translateY(-2px);
+}
+
+.clearButton:active {
+    transform: translateY(1px);
+}
+
+/* IPButton Styles */
+.getIpInfoButton {
+    padding: 12px 32px;
+    font-size: 16px;
+    background: transparent;
+    color: var(--terminal-green);
+    border: 1px solid var(--terminal-green);
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.getIpInfoButton:hover {
+    background: var(--terminal-green);
+    color: var(--terminal-bg);
+    box-shadow: 0 0 20px var(--glow-color);
+    transform: translateY(-2px);
+}
+
+.getIpInfoButton:active {
+    transform: translateY(1px);
+}
